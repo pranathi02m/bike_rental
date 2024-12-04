@@ -1,0 +1,63 @@
+<div style="background-color: #f8f8f8; min-height: 91vh; padding: 24px;">
+  <style>
+    .teal-button {
+      background-color: #008080;
+      color: white;
+      border: none;
+      padding: 6px 16px; /* Adjust padding for better alignment */
+      border-radius: 4px;
+      font-size: 14px; /* Ensure consistent font size */
+      line-height: 1.5; /* Adjust for vertical alignment */
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: inline-flex; /* Aligns text vertically */
+      justify-content: center;
+      align-items: center;
+      height: 36px; /* Consistent button height */
+    }
+
+    .teal-button:hover {
+      background-color: #006666; /* Darker teal on hover */
+    }
+
+    .button-spacing {
+      margin-right: 10px; /* Add spacing between buttons */
+    }
+  </style>
+
+  <div style="padding-top: 10px;"></div>
+
+  <div style="margin-top: 10px;" class="child" *ngFor="let bike of bikes">
+    <div nz-row style="background-color: #ccc; padding: 24px; border-radius: 10px;">
+      <div nz-col nzSpan="8">
+        <img class="profile" style="height: 130px; border-radius: 10px; object-fit: cover;" [src]="bike.processedImage"
+          alt="profile">
+      </div>
+
+      <div nz-col nzSpan="16">
+        <h2 style="cursor: pointer; color: teal;">{{bike.brand}} - {{bike.name}}</h2>
+
+        <p>{{bike.description}}</p>
+
+        <hr>
+
+        <h5>Price: <b>${{bike.price}}</b> - Color : <b>{{bike.color}}</b> - Transmission : <b>{{bike.transmission}}</b> -
+          Type : <b>{{bike.type}}</b> - Year : <b>{{bike.year}}</b>
+        </h5>
+
+        <div style="float: right;">
+          <button class="teal-button button-spacing" nzSize="small" nz-button nzType="primary"
+            routerLink="/admin/bike/{{bike.id}}">
+            Update
+          </button>
+
+          <button class="teal-button" nzSize="small" nz-button nzType="primary" nzDanger
+            (click)="deleteBike(bike.id)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

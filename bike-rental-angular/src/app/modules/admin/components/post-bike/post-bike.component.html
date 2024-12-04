@@ -1,0 +1,153 @@
+<div
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    padding: 20px;
+  "
+>
+  <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip="Working...">
+    <style>
+      .form-container {
+        width: 100%;
+        max-width: 500px; /* Reduced width */
+        background-color: #ffffff;
+        padding: 30px; /* Reduced padding */
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .form-title {
+        font-size: 20px; /* Slightly smaller font size */
+        font-weight: bold;
+        color: #004d4d;
+        margin-bottom: 16px;
+        text-align: center;
+      }
+
+      .form-control {
+        width: 100%;
+        margin-bottom: 12px; /* Reduced spacing between fields */
+      }
+
+      .form-control nz-form-item {
+        width: 100%;
+      }
+
+      .teal-button {
+        background-color: #008080;
+        color: white;
+        border: none;
+        padding: 8px 16px; /* Smaller button size */
+        border-radius: 5px;
+        font-size: 14px; /* Reduced font size */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 16px;
+        width: 100%;
+        display: flex;              /* Enable flexbox for centering */
+        justify-content: center;    /* Horizontally center the content */
+        align-items: center;        /* Vertically center the content */
+        text-align: center;         /* Ensure the text is aligned in the center */
+      }
+
+      .teal-button:hover {
+        background-color: #028585;
+      }
+
+      .profile-badge img {
+        height: 120px; /* Reduced image size */
+        width: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid #008080;
+      }
+
+      #upload_profile_image {
+        margin-top: 10px;
+      }
+    </style>
+
+    <div class="form-container">
+      <h1 class="form-title">Post Bike</h1>
+
+      <form nz-form [formGroup]="postBikeForm" class="form-control">
+        <!-- Profile Image Upload -->
+        <div class="pb-6">
+          <div class="profile-badge">
+            <label for="upload_profile_image" class="upload-label" *ngIf="selectedFile">
+              <img class="profile" [src]="imagePreview" alt="profile" />
+            </label>
+            <input
+              type="file"
+              nz-button
+              nzType="primary"
+              id="upload_profile_image"
+              (change)="onFileSelected($event)"
+              accept="image/*"
+            />
+          </div>
+        </div>
+
+        <!-- Form Fields -->
+        <div *ngFor="let control of [
+          { name: 'brand', placeholder: 'Select a Brand', options: listOfBrands },
+          { name: 'type', placeholder: 'Select a Type', options: listOfType },
+          { name: 'transmission', placeholder: 'Select a Transmission', options: listOfTransmission },
+          { name: 'color', placeholder: 'Select a Color', options: listOfColor }
+        ]">
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <nz-select
+                [formControlName]="control.name"
+                nzShowSearch
+                nzAllowClear
+                [nzPlaceHolder]="control.placeholder"
+              >
+                <nz-option *ngFor="let option of control.options" [nzLabel]="option" [nzValue]="option"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <!-- Additional Inputs -->
+        <div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <input nz-input placeholder="Name" formControlName="name" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <input nz-input placeholder="Modal Year" formControlName="year" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <input nz-input placeholder="Price" formControlName="price" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <textarea formControlName="description" rows="3" nz-input placeholder="Description"></textarea>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="teal-button" nz-button [nzType]="'primary'" (click)="postBike()">
+          Post Bike
+        </button>
+      </form>
+    </div>
+  </nz-spin>
+</div>

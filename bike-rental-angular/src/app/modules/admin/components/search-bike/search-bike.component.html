@@ -1,0 +1,160 @@
+<div
+  style="
+    margin-top: 50px;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+  "
+>
+  <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip="Working...">
+    <style>
+      .form-container {
+        width: 100%;
+        max-width: 500px;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #004d4d;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .form-control {
+        margin-bottom: 15px;
+      }
+
+      .search-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #008080;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .search-button:hover {
+        background-color: #006666;
+      }
+
+      .bike-list-container {
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .bike-list-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #004d4d;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .bike-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .bike-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+
+      .bike-card h2 {
+        font-size: 18px;
+        color: #333333;
+        margin: 10px 0 5px;
+      }
+
+      .bike-card p {
+        font-size: 14px;
+        color: #666666;
+        margin: 3px 0;
+      }
+    </style>
+
+    <div class="form-container">
+      <h1 class="form-title">Search Bike</h1>
+      <form nz-form [formGroup]="searchBikeForm">
+        <div class="form-control">
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <nz-select formControlName="brand" nzShowSearch nzAllowClear nzPlaceHolder="Select a Brand">
+                <nz-option *ngFor="let brand of listOfBrands" nzLabel="{{brand}}" nzValue="{{brand}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="form-control">
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <nz-select formControlName="type" nzShowSearch nzAllowClear nzPlaceHolder="Select a Type">
+                <nz-option *ngFor="let type of listOfType" nzLabel="{{type}}" nzValue="{{type}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="form-control">
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <nz-select formControlName="transmission" nzShowSearch nzAllowClear nzPlaceHolder="Select a Transmission">
+                <nz-option *ngFor="let transmission of listOfTransmission" nzLabel="{{transmission}}" nzValue="{{transmission}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="form-control">
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="This Input Is Required">
+              <nz-select formControlName="color" nzShowSearch nzAllowClear nzPlaceHolder="Select a Color">
+                <nz-option *ngFor="let color of listOfColor" nzLabel="{{color}}" nzValue="{{color}}"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <button class="search-button" nz-button [nzType]="'primary'" (click)="searchBike()">
+          Search
+        </button>
+      </form>
+    </div>
+  </nz-spin>
+</div>
+
+<div *ngIf="bikes && bikes.length > 0" class="bike-list-container">
+  <h1 class="bike-list-title">Bike List</h1>
+  <div class="flex flex-wrap">
+    <div class="bike-card w-1/4 p-4" *ngFor="let bike of bikes">
+      <img [src]="bike.processedImage" alt="bike">
+      <h2>{{ bike.name }}</h2>
+      <p>{{ bike.brand }}</p>
+      <p>{{ bike.type }}</p>
+      <p>{{ bike.transmission }}</p>
+      <p>{{ bike.color }}</p>
+      <p>{{ bike.price }}</p>
+    </div>
+  </div>
+</div>
+

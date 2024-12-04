@@ -1,0 +1,24 @@
+<nz-spin [nzSpinning]="isSpinning">
+  <div *ngFor="let booking of bookings">
+    <div style="margin-top: 10px;" class="child">
+      <div nz-row style="background-color: #fff; padding: 24px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-bottom: 20px;">
+        <div nz-col nzSpan="8">
+          <h2 style="cursor: pointer; color: #028585; font-size: 18px; margin-bottom: 8px;">Booking Status: {{booking.bookBikeStatus}}</h2>
+          
+          <h5 style="font-size: 14px; color: #333; margin-bottom: 8px;">
+            Booking Id: <b>{{booking.id}}</b> - bike id: <b>{{booking.bikeId}}</b>
+          </h5>
+          <h5 style="font-size: 14px; color: #333; margin-bottom: 8px;">
+            From Date: <b>{{booking.fromDate | date: 'dd-MM-yyyy'}}</b> - To Date: <b>{{booking.toDate | date: 'dd-MM-yyyy'}}</b>
+          </h5>
+          <h5 style="font-size: 14px; color: #333; margin-bottom: 8px;">
+            No of Days: <b>{{booking.days}}</b>
+          </h5>
+          <h5 style="font-size: 14px; color: #333; margin-bottom: 16px;">
+            Total Price: <b>${{booking.price}}</b>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</nz-spin>

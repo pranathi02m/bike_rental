@@ -1,0 +1,36 @@
+<div style="background-color: #f8f8f8; min-height: 91vh; padding: 24px;" *ngIf="bike">
+  <div style="padding-top: 10px;"></div>
+
+  <div style="margin-top: 10px;" class="child">
+    <div style="background-color: #fff; padding: 24px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+      <div>
+        <img class="profile w-1/2 m-auto" style="height: 230px; border-radius: 10px; object-fit: cover;" [src]="bike.processedImage" alt="profile">
+      </div>
+
+      <div style="padding-top: 24px;">
+        <h2 style="cursor: pointer; color: #028585; font-size: 20px; margin-bottom: 10px;">{{bike.brand}} - {{bike.name}}</h2>
+
+        <p style="color: #555; font-size: 16px; line-height: 1.5;">{{bike.description}}</p>
+
+        <h5 style="font-size: 16px; color: #333; margin-top: 16px;">
+          Price: <b>${{bike.price}}</b> - Color: <b>{{bike.color}}</b> - Transmission: <b>{{bike.transmission}}</b> - 
+          Type: <b>{{bike.type}}</b> - Year: <b>{{bike.year}}</b>
+        </h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center pt-6">
+    <form (ngSubmit)="onSubmit()">
+      <div style="display: flex; gap: 16px; flex-direction: column; max-width: 500px; width: 100%; margin: 0 auto;">
+        <input type="date" id="from_date" name="from_date" [(ngModel)]="date_from" placeholder="From Date" style="padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;"/>
+        <input type="date" id="to_date" name="to_date" [(ngModel)]="date_to" placeholder="To Date" style="padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;"/>
+        <input type="number" id="days" name="days" [(ngModel)]="days" placeholder="No of Days" style="padding: 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 14px;"/>
+        
+        <button type="submit" style="min-width: 100px; background-color: #028585; color: white; border: none; padding: 10px 20px; border-radius: 4px; font-size: 14px; cursor: pointer;">
+          Book
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

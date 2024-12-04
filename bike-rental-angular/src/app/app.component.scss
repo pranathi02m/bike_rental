@@ -1,0 +1,33 @@
+.custom-navbar {
+  background: linear-gradient(to right,#66cdaa, #008080); // Teal to lighter teal gradient
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+
+  .navbar-title {
+    > a {
+      color: white !important;
+      margin-left: 10px;
+      font-size: 18px;
+      font-weight: bolder;
+      text-decoration: none;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+
+    a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: #e0f7fa; // Very light teal on hover
+      }
+    }
+  }
+}
